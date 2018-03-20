@@ -1,0 +1,420 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<link href="css/content.css" rel="stylesheet" />
+		<link href="css/index.css" rel="stylesheet" />
+		<link href="css/base.css" rel="stylesheet" />
+	</head>
+	<body id="content">
+		<div class="mui-page" id="loadBox">
+			<header class="mui-bar mui-bar-nav">
+				<!--返回按钮-->
+		      	<button type="button" class="mui-left mui-action-back mui-btn  mui-btn-link mui-btn-nav mui-pull-left">
+					<span class="mui-icon mui-icon-left-nav"></span>
+				</button>
+				<!--详情页小说名称-->
+				<!--data-num用来存储此页小说的num属性，便于加载-->
+		    	<h1 class="mui-title" data-num="{{num}}">{{name}}</h1>
+		   </header>
+			<!--页面标题栏结束-->
+			<div class="mui-content" id="bookIntroBox">
+				<!--此段可动态添加数据加载进bookIntroBox-->
+				<!--头部小说简介开始-->
+			    <div class="bookIntro">
+			    	<div>
+			    		<!--小说封面图-->
+			    		<img src="{{url}}{{pic}}" alt="" id="pics"/>
+			    		<!--小说文字介绍-->
+			    		<div class="bookIntroRight">
+			    			<h4>{{name}}</h4>
+					    	<p>{{type}}</p>
+					    	<p><span>{{author}}</span>&nbsp;&nbsp;{{sections}}章</p>
+					    	<!--五星评分开始-->
+					    	<div class="pingfen allUser">
+								<ul>
+									<li></li><li></li><li></li><li></li><li></li>
+								</ul>
+							</div>
+					    	<!--五星评分结束-->
+			    		</div>
+				    	<!--小说文字介绍结束-->
+			    	</div>
+			    </div>
+				<!--头部小说简介结束-->
+			</div>
+			<div class="bookMain">
+				<p class="textTit">内容简介：</p>
+				<div class="textBlock" id="textBl">
+					{{desc}}
+				</div>
+				<!--为span添加js，可以展开文本块，但是缩不回去那种，想缩回去再让我改-->
+				<span class="mui-icon mui-icon-arrowdown" id="getAll"></span>
+			</div>
+			<!--功能按钮开始-->
+			<div class="bookButt">
+				<!--三个按钮用弹性盒布局-->
+				<button id="bookCollect"><p>已收藏
+					<br />收藏</p>
+				</button>
+				<button id="bookRead">阅读</button>
+				<button id="joinStage">加入书架</button>
+			</div>
+			<!--功能按钮结束-->
+			<!--书评开始-->
+			<div id="textComments">
+				<div class="textCommentsTit">
+					<span class="mui-icon">
+						<img src="imgs/comm.png" alt="" />
+					</span>
+					<b>精彩书评</b>
+				</div>
+				<div class="textCommentsList">
+					<!--书评列表开始-->
+					<ul class="mui-table-view">
+						<!--每个li为一条评论-->
+						{{#comments}}
+					    <li class="mui-table-view-cell mui-media">
+					        <a href="javascript:;"><!--阻止a默认行为，js替换-->
+					        	<!--用户头像-->
+					            <img class="mui-media-object mui-pull-left" src="{{pic}}">
+					            <div class="mui-media-body">
+					            	<!--用户名-->
+					            	<div class="userName">{{name}}</div>
+					            	<!--五星评分开始-->
+							    	<div class="pingfen singleUser">
+										<ul><li></li><li></li><li></li><li></li><li></li>
+										</ul>
+									</div>
+							    	<!--五星评分结束-->
+					                <p class="mui-ellipsis">{{word}}</p>
+					            </div>
+					        </a>
+					    </li>
+					    {{/comments}}
+					</ul>
+					<!--书评列表结束-->
+				</div>
+			</div>
+			<!--相似推荐开始//结构同首页猜你喜欢-->
+				<div class="likeRead">
+					<!--板块标题部分-->
+					<div class="readTit readTit-like">
+						<span class="mui-icon">
+							<img src="imgs/heart.png" alt="" />
+						</span>
+						<span class="section_title">相似推荐</span>
+					</div>
+					<div class="mui-scroll-wrapper mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
+				        <div class="mui-scroll">
+				        	<!--弹性盒布局-->
+				            <li class="flex">
+				            	<!--card可循环添加数据-->
+				            	{{#suiji}}
+			                    <div class="card">
+			                    	<a href="contentRead.html?num={{num}}">
+									<!--页眉，放置标题-->
+										<div class="card-header">
+											<p>{{name}}</p>
+										</div>
+										<!--内容区-->
+										<div class="card-content">
+											<!--图书封面-->
+											<img src="{{pics}}" alt="" />
+										</div>
+									</a>
+									<div class="card-footer">
+										<!--加入收藏按钮-->
+										<a class="mui-card-link textCollect">
+											<span class="mui-icon mui-icon-star"></span>
+										</a>
+										<!--加入书架按钮-->
+										<a class="mui-card-link addBook">
+											<span class="mui-icon mui-icon-plusempty"></span>
+										</a>
+									</div>
+								</div>
+								{{/suiji}}
+				            </li>
+				        </div>
+				   </div>
+				</div>
+			<!--相似推荐结束-->
+		</div>
+		<script type="text/html" id="loadContent">
+			<!--页面标题栏开始-->
+			{{#myData}}
+			<header class="mui-bar mui-bar-nav">
+				<!--返回按钮-->
+		      	<button type="button" class="mui-left mui-action-back mui-btn  mui-btn-link mui-btn-nav mui-pull-left">
+					<span class="mui-icon mui-icon-left-nav"></span>
+				</button>
+				<!--详情页小说名称-->
+				<!--data-num用来存储此页小说的num属性，便于加载-->
+		    	<h1 class="mui-title" data-num="{{num}}">{{name}}</h1>
+		   </header>
+			<!--页面标题栏结束-->
+			<div class="mui-content" id="bookIntroBox">
+				<!--此段可动态添加数据加载进bookIntroBox-->
+				<!--头部小说简介开始-->
+			    <div class="bookIntro">
+			    	<div>
+			    		<!--小说封面图-->
+			    		<img src="{{url}}{{pic}}" alt="" id="pics"/>
+			    		<!--小说文字介绍-->
+			    		<div class="bookIntroRight">
+			    			<h4>{{name}}</h4>
+					    	<p>{{type}}</p>
+					    	<p><span>{{author}}</span>&nbsp;&nbsp;{{sections}}章</p>
+					    	<!--五星评分开始-->
+					    	<div class="pingfen allUser">
+								<ul>
+									<li></li><li></li><li></li><li></li><li></li>
+								</ul>
+							</div>
+					    	<!--五星评分结束-->
+			    		</div>
+				    	<!--小说文字介绍结束-->
+			    	</div>
+			    </div>
+				<!--头部小说简介结束-->
+			</div>
+			<div class="bookMain">
+				<p class="textTit">内容简介：</p>
+				<div class="textBlock" id="textBl">
+					{{desc}}
+				</div>
+				<!--为span添加js，可以展开文本块，但是缩不回去那种，想缩回去再让我改-->
+				<span class="mui-icon mui-icon-arrowdown" id="getAll"></span>
+			</div>
+			<!--功能按钮开始-->
+			<div class="bookButt">
+				<!--三个按钮用弹性盒布局-->
+				<button id="bookCollect"><p>已收藏
+					<br />收藏</p>
+				</button>
+				<button id="bookRead">阅读</button>
+				<button id="joinStage">加入书架</button>
+			</div>
+			<!--功能按钮结束-->
+			<!--书评开始-->
+			<div id="textComments">
+				<div class="textCommentsTit">
+					<span class="mui-icon">
+						<img src="imgs/comm.png" alt="" />
+					</span>
+					<b>精彩书评</b>
+				</div>
+				<div class="textCommentsList">
+					<!--书评列表开始-->
+					<ul class="mui-table-view">
+						<!--每个li为一条评论-->
+						{{#comments}}
+					    <li class="mui-table-view-cell mui-media">
+					        <a href="javascript:;"><!--阻止a默认行为，js替换-->
+					        	<!--用户头像-->
+					            <img class="mui-media-object mui-pull-left" src="{{pic}}">
+					            <div class="mui-media-body">
+					            	<!--用户名-->
+					            	<div class="userName">{{name}}</div>
+					            	<!--五星评分开始-->
+							    	<div class="pingfen singleUser">
+										<ul><li></li><li></li><li></li><li></li><li></li>
+										</ul>
+									</div>
+							    	<!--五星评分结束-->
+					                <p class="mui-ellipsis">{{word}}</p>
+					            </div>
+					        </a>
+					    </li>
+					    {{/comments}}
+					</ul>
+					<!--书评列表结束-->
+				</div>
+			</div>
+			
+			{{/myData}}
+			<!--书评结束-->
+		</script>
+		<script src="js/mui.min.js"></script>
+		<script src="js/jquery.min.js"></script>
+		<script src="js/mustache.min.js"></script>
+		<script src="js/config.js"></script>
+		<script type="text/javascript">
+		
+		</script>
+		<script type="text/javascript">
+			mui.init();
+			function allIntro(){
+				document.getElementById('getAll').addEventListener('tap', function() {
+					document.getElementById('textBl').style.height='auto';
+					this.style.display='none';
+				})
+			}
+		</script>
+		<script>
+			$(function(){
+				data = {
+    			token:window.localStorage.getItem('token')
+    			}
+				$.post(config.site.urlRoot+'collectors',data,function(data){
+    				if(data.status==0){
+    					return false;	
+    				}
+    				var nowid = window.location.search.slice(1).split("=")[1];
+					 for (var i=0;i<data.length;i++){
+			            if(data[i]['id']==nowid){
+			                window.swich = true;
+			            }
+			        }
+					
+				});
+
+    			});
+		</script>
+		<script type="text/javascript">
+		function collJoin(){
+			var swich=window.swich;//记录收藏状态，false为未收藏
+			if(swich){
+				mui('#bookCollect p')[0].style.marginTop=0;
+			}else{
+				mui('#bookCollect p')[0].style.marginTop='-1.6rem';	
+			}
+			var name=mui('#bookIntroBox h4')[0].innerHTML;
+			var author=mui('#bookIntroBox p>span')[0].innerHTML;
+			var num=mui('header h1')[0].attributes['data-num'].value;
+			mui('#bookCollect')[0].addEventListener('tap',function(){
+//				创建一个新的对象存储此书信息
+				var newCollectData;
+				if(swich){
+					mui('#bookCollect p')[0].style.marginTop='-1.6rem';
+					swich=false;
+//					此时状态为未收藏,页面显示收藏按钮
+//					清空新建的对象
+					newCollectData={
+						book_id:num,
+						token:window.localStorage.getItem('token'),
+						type:'del',
+					}
+				}else{
+					mui('#bookCollect p')[0].style.marginTop=0;
+					swich=true;
+//					此时状态为已收藏,页面显示已收藏
+//					将本书信息添加进新对象
+					newCollectData={
+						book_id:num,
+						token:window.localStorage.getItem('token'),
+						type:'add'
+					}
+				}
+				$.post(config.site.urlRoot+'collectorChange',newCollectData,function(info){ 
+					if(info.status==1&&newCollectData.type==add)
+					{
+						mui.toast('收藏成功');
+					}
+
+  				});
+			})
+//			加入书架
+			if(!window.shelf){
+				mui('#joinStage')[0].addEventListener('tap',function(){
+				mui(this)[0].style.backgroundColor='#999';
+				var pic=mui('#pics')[0].cloneNode();
+				document.body.appendChild(pic);
+				pic.classList='joinTo rollOut';
+				pic.style.left=mui('#pics')[0].offsetLeft*3+'px';
+				pic.style.top=mui('#pics')[0].offsetTop+mui('.bookIntro')[0].offsetHeight+mui('.bookMain')[0].offsetHeight+'px';
+				var newJoinBook={
+					novel_id:num,
+					type:'add',
+					token:window.localStorage.getItem('token')
+				}
+				$.post(config.site.urlRoot+'shelfChange',newJoinBook,function(info){
+				alert(info); 
+					if(info){
+						mui.toast('加入成功!');
+					}
+  				});
+			})
+			}
+			
+		}
+		</script>
+
+		<script>
+			window.shelf = false;
+				var shelf = function(){
+					data = {
+	    			token:window.localStorage.getItem('token')
+	    			}
+					$.post(config.site.urlRoot+'shelf',data,function(data){
+				
+    				var nowid = window.location.search.slice(1).split("=")[1];
+    				
+    				for (var i=0;i<data.length;i++){
+    					
+			            if(data[i]['id']==nowid){
+			            	window.shelf = true;
+			                $('#joinStage').css('background','#999');
+			            }
+			            else{
+			            	window.shelf = false;
+			            }
+
+			        }
+			})
+				};
+			var bookCont;
+			var loadData;
+	    	$(function(){
+	    		var id=window.location.search.slice(1).split("=")[1];
+	    		console.log(id);
+				var contentRead;
+		    	$(function(){
+		    		data= {
+		    			id:id
+		    		}
+		    		$.post(config.site.urlRoot+'contentRead',data,function(data){
+		    			contentRead=data;
+		  				contentRead['url'] = config.site.urlRoot;
+		  				contentRead['num'] = contentRead['id'];
+						//替换模板数据
+						var collectorData={
+		    				myData:contentRead
+		    				}
+		    				//得到模板
+							var str =document.getElementById("loadContent").innerHTML;
+							var res=Mustache.render(str,collectorData);
+							var oBox= $('#loadBox');
+							oBox.html(res);})
+		    	
+	    		setTimeout(function(){
+	    						shelf();
+	    						allIntro();
+	    						collJoin();
+								scroll();
+								
+	    					}
+							,1000)
+	    		});
+	    	});
+		</script>
+		<script type="text/javascript">
+			function scroll(){
+				var deceleration = mui.os.ios?0.003:0.0009;
+				mui('.mui-scroll-wrapper').scroll({
+					scrollY: true, //是否竖向滚动
+					scrollX: true, //是否横向滚动
+					startX: 0, //初始化时滚动至x
+					startY: 0, //初始化时滚动至y
+					indicators: false, //是否显示滚动条
+					bounce: true, //是否启用回弹
+					deceleration: deceleration //flick 减速系数，系数越大，滚动速度越慢，滚动距离越小，默认值0.0006
+				});
+			}
+		</script>
+	</body>
+</html>

@@ -1,0 +1,33 @@
+#offCanvasSide {
+  background-color: #f5f5f5;
+}
+#offCanvasSide > .mui-scroll-wrapper > .mui-scroll > h2 {
+  margin-top: 3rem;
+  margin-left: 2rem;
+  color: #87ceeb;
+}
+#offCanvasSide #userCenter {
+  margin-top: 2rem ;
+  margin-bottom: 2rem;
+}
+#offCanvasSide #userCenter > img {
+  border-radius: 50%;
+  border: 0.3rem solid #ddd;
+  width: 100px;
+  height: 100px;
+  margin: 10px auto;
+  display: block;
+}
+#offCanvasSide #userCenter > h4 {
+  text-align: center;
+}
+#offCanvasSide #collect > h3 {
+  padding-left: 2rem;
+  margin-bottom: 1rem;
+}
+#offCanvasSide #collect > h3 a {
+  font-size: 0.8rem;
+}
+#offCanvasSide #collect > h3 .mui-collapse-content > a > p {
+  font-size: 0.8rem;
+}

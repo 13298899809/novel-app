@@ -1,0 +1,13 @@
+.classify .mui-table-view-cell.mui-media{
+	float: left;
+    padding: 10px 12px;
+    margin-bottom: 0.8rem;
+}
+
+.mui-table-view-cell:after{
+	display: none;
+}
+
+.mui-content{
+	padding: 45px 0 50px 0;
+}

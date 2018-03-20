@@ -1,0 +1,172 @@
+#content{
+
+    & .bookButt{
+        display: flex;
+        justify-content: space-around;
+        margin: 0.8rem;
+        & button{
+            color: #fff;
+            border: none;
+            overflow: hidden;
+            height: 2rem;
+            line-height: 1.6rem;
+            padding-bottom: 0;
+        }
+        & button:first-child{
+           background-color: skyblue;
+           & p{
+               color: #fff;
+               margin-top: -1.5rem;
+               transition: all 0.5s;
+           }
+        }
+        & button:nth-child(2){
+           background-color: #f44848;
+        }
+        & button:nth-child(3){
+           background-color: #76ca5e;
+        }
+    }
+    
+    & .textBlock{
+        overflow: hidden;
+        padding: 10px;
+        font-size: 12px;
+        height: 52px;
+    }
+    
+    & .bookIntro{
+        display: flex;
+        justify-content: space-around;
+        background-color: rgba(135,206,235,0.6);
+        width: 100%;
+        padding: 20px 50px;
+        overflow: hidden;
+        border-bottom: 1px solid #bbb;
+        & img{
+            margin-right: 1rem;
+            display: inline;
+            width:90px;
+            vertical-align: middle;
+            float: left;
+        }
+        &>div{
+            width: 15rem;
+        }
+        & h4{
+            margin-top: 1rem;
+            color: #4c4c4c;
+        }
+        & p{
+            color: #fff;
+        }
+    }
+    
+    & .bookMain{
+        background-color: #fff;
+        & .textTit{
+            padding-top: 0.5rem;
+            padding-left: 1rem;
+            margin-bottom: 0;
+        }
+        & .textBlock{
+            text-indent: 2em;
+        }
+        &>span{
+            border-radius: 0.5rem;
+            width:100%;
+            text-align: center;
+            border:1px solid #bbb;
+        }
+    }
+    /*评分样式*/
+    & .pingfen{
+        height: 20px;
+        & ul{
+            overflow:hidden;
+            padding: 0;
+            margin: 0;
+            & li{
+                width: 20px;
+                height: 20px;
+                background: url('../imgs/21.gif');
+                list-style-type:none;
+                float: left;
+                background-size:cover;
+            }
+        }
+        & li.jinxing{
+            background-position:left bottom;
+        }
+        & span{
+            color:#f60;
+            font-weight: bold;
+        }
+    }
+    //书评样式
+    & #textComments{
+        margin: 2rem 0 1rem;
+        padding: 0.5rem 1.5rem;
+        background-color: #fff;
+        & .textCommentsTit{
+            margin-bottom: 1rem;
+            & span img{
+                width: 1.5rem;
+            }
+            & b{
+                font-size: 1.2rem;
+            }
+        }
+        & .textCommentsList{
+            & .mui-table-view-cell>a:not(.mui-btn){
+                white-space: normal;
+            }
+            & .mui-ellipsis{
+                white-space: normal;
+            }
+        }
+    }
+    & .likeRead>.readTit>span>img{
+        width:100%;
+    }
+    
+    
+    & .joinTo{
+        position: absolute;
+        width:3rem;
+        -webkit-animation-duration: 1s;
+        animation-duration: 1s;
+        -webkit-animation-fill-mode: both;
+        animation-fill-mode: both;
+        transition: all 5.5s;
+    }
+    
+    
+    @-webkit-keyframes rollOut {
+        0% {
+            opacity: 1
+        }
+        100% {
+            opacity: 0;
+            -webkit-transform: translate3d(-300px, 500px, 0) rotate3d(0, 0, 1, 120deg);
+            transform: translate3d(-300px, 500px, 0) rotate3d(0, 0, 1, 120deg)
+        }
+    }
+    
+    @keyframes rollOut {
+        0% {
+            opacity: 1
+        }
+        100% {
+            opacity: 0;
+            -webkit-transform: translate3d(-300px, 500px, 0) rotate3d(0, 0, 1, 120deg);
+            -ms-transform: translate3d(-300px, 500px, 0) rotate3d(0, 0, 1, 120deg);
+            transform: translate3d(-300px, 500px, 0) rotate3d(0, 0, 1, 120deg)
+        }
+    }
+    
+    & .rollOut {
+        -webkit-animation-name: rollOut;
+        animation-name: rollOut
+    }
+}

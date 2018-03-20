@@ -1,0 +1,131 @@
+.subpages {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 50px;
+  left: 0;
+  bottom: 50px;
+}
+#index {
+  margin-bottom: 8rem;
+}
+#index img {
+  width: 100%;
+}
+#index .mui-input-row.mui-search {
+  margin: 10px 10px 0px;
+}
+#index .huadong {
+  background-color: #fff;
+  margin: 2px 0px;
+}
+#index .mui-slider-indicator.mui-segmented-control.mui-segmented-control-inverted {
+  height: 200px;
+}
+#index .flex {
+  flex-wrap: nowrap;
+  width: auto;
+}
+#index .flex .card {
+  width: 100px;
+  margin: 10px;
+  background-color: #fff;
+}
+#index .flex .card .card-content img {
+  width: 90%;
+  margin: 0 auto;
+}
+#index .flex .card .card-header {
+  background-color: #fff;
+  padding: 5px;
+}
+#index .flex .card .card-header > p {
+  font-size: 10px;
+  margin-bottom: 0px;
+}
+#index .flex .card .card-header .card-footer {
+  display: flex;
+  justify-content: space-between;
+}
+#index .flex .card .card-header .card-footer .mui-card-link {
+  width: 20px;
+}
+#index .mui-slider-indicator .mui-icon {
+  border: none;
+  width: 25px;
+  line-height: 25px;
+}
+#index .readTit {
+  font-size: 1.5rem;
+  margin: 1.5rem auto 0rem auto;
+  padding-left: 2rem;
+}
+#index .readTit > span {
+  vertical-align: middle;
+  font-size: 1.5rem;
+  color: #4CD964;
+  margin-right: 1rem;
+}
+#index .mui-icon {
+  width: 2rem;
+  vertical-align: middle;
+}
+#index #commend {
+  background-color: #fff;
+}
+#index #commend .commendList {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.8rem 1.5rem;
+}
+#index #commend .commendList img {
+  width: 5rem;
+  height: 7rem;
+  margin-right: 1.5rem;
+}
+#index #commend .commendList .intro .flex {
+  justify-content: space-around;
+}
+#index #commend .commendList .intro .flex > span {
+  vertical-align: middle;
+  font-size: 0.8rem;
+}
+#index #commend .commendList .intro .flex > span:first-child {
+  flex: 2;
+}
+#index #commend .commendList .intro .flex > span:nth-child(2) {
+  flex: 2;
+  margin-right: 0.5rem;
+  color: #ff0000;
+}
+#index #commend .commendList .intro .flex > span:nth-child(3) {
+  flex: 3;
+  width: auto;
+}
+#index .tag {
+  border: 1px solid #87ceeb;
+  text-align: center;
+  border-radius: 0.3rem;
+}
+#index .mui-row .mui-table-view-cell {
+  padding: 1px;
+}
+#index .mui-card-footer,
+#index .mui-card-header {
+  padding: 5px;
+  font-size: 12px;
+  overflow: hidden;
+}
+#index .mui-card-header {
+  white-space: nowrap;
+  min-height: 21px;
+}
+#index .indexBox .mui-content img {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+#index .mui-card-footer .mui-card-link,
+#index .mui-card-header .mui-card-link {
+  line-height: 21px;
+}

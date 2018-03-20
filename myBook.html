@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title></title>
+		<script src="js/mui.min.js"></script>
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="css/myBook.css" />
+		<link href="css/base.css" rel="stylesheet" />
+		<script type="text/javascript" src="js/jquery.min.js"></script>
+		<link rel="stylesheet" href="css/gonggao.css" />
+	</head>
+	<body>
+		<div id="pageBox">
+	    <div class="mui-content mui-scroll-wrapper" id="box">
+	      	<div class="mui-scroll">
+	        <!-- 主界面具体展示内容 -->
+		        <div class="mui-row myBookList" >
+		        	<!--下面数据加载-->
+			    </div>
+			    <button type="button" class="bookLogin mui-btn mui-btn-primary">登录</button>
+	       </div>
+	    </div>
+		<script type="text/html" id="data">
+			{{#data}}
+	        <a class="mui-col-sm-3 mui-col-xs-6" data-num="{{id}}" href="./contentRead.html?id={{id}}">
+	           <img src="{{url}}{{pic}}" alt="" style="max-width:80px" /> 
+	           <p>{{name}}</p>
+	        </a>
+	        {{/data}}
+		</script>
+		<script type="text/javascript">
+			mui.init();
+		</script>
+		<script type="text/javascript" src="js/myBook.js"></script>
+		</div>
+	    <script type="text/javascript" src="data/myBook.json"></script>
+	    <script type="text/javascript" src="data/colloect.json"></script>
+	    <script type="text/javascript" src="js/mustache.min.js"></script>
+	    <script src="js/config.js"></script>
+	     <script type="text/javascript">
+    	var myBook;
+//  	拿数据的函数
+    	function getMyBook(){
+    		
+    			data = {
+    			token:window.localStorage.getItem('token')
+    			}
+    			$.post(config.site.urlRoot+'shelf',data,function(data){
+    			myBook=data;
+    			
+    			for(var i=0;i<myBook.length;i++){myBook[i].url=config.site.urlRoot}
+    			
+    			var oData={
+    				data:myBook
+    			}
+    						//得到模板
+				var str=document.getElementById("data").innerHTML;
+				//替换模板数据
+				var res=Mustache.render(str,oData);
+				var oBox=document.getElementById("box");
+					oBox.innerHTML=res;
+					console.log(res);
+    			
+    			//  	给图书下划线增加颜色,更改数组colorBootm即可更改
+		    	var bookList={
+		    		colorBootm:['red','skyblue','green','yellow'],
+		    		fourColor:function(){
+		    			var oBook=mui('.myBookList>.mui-col-sm-3');
+		    			for(var i=0;i<oBook.length;i++){
+		    				var cs=bookList.colorBootm.length;
+		    				var num=i%cs;
+		    				oBook[i].style.borderBottomColor = bookList.colorBootm[num];
+		    			}
+		    		}
+		    	}
+    			bookList.fourColor();
+    			
+    			
+    		},'json');
+    			
+    		
+    	};
+    </script>
+    <script type="text/javascript">
+    	var pl=(document.documentElement.clientWidth-$('.bookLogin').width())/2;
+    	var pt=(document.documentElement.clientHeight-$('.bookLogin').height())/2;
+    	$('.bookLogin').css({left:pl,top:pt});
+    	$('.bookLogin').on('tap',function(){
+    		window.location='login.html';
+    	});
+    
+ 	//用户登录判断及执行代码块
+ 	if((window.localStorage.getItem('token'))&&window.localStorage.getItem('token').length>0){
+ 		$('.bookLogin').hide();
+//  		加载数据
+ 		getMyBook();
+ 	}
+
+
+
+    </script>
+    <script type="text/javascript">
+    	$('#box').on('tap','a',function(){
+    		var url="contentRead.html?num="+this.dataset.num;
+    		window.open=url;
+    	})
+    </script>
+    <script>
+    	window.onload = function(){
+		  //从服务器获取数据
+		  //业务数据获取完毕，并已插入当前页面DOM；
+		  //注意：若为ajax请求，则需将如下代码放在处理完ajax响应数据之后；
+		  mui.plusReady(function(){
+		    //关闭等待框
+		    plus.nativeUI.closeWaiting();
+		    //显示当前页面
+		    mui.currentWebview.show();
+		  });
+		}
+   </script>
+	</body>
+</html>

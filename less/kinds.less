@@ -1,0 +1,56 @@
+#kinds{
+
+    @boyColor:#36e;
+    
+    & .classify {
+        position: relative;
+        & .mui-table-view{
+            padding-bottom: 1.8rem;
+            
+        }
+        
+        & .classify-tit span{
+            font-size: 1.5rem;
+            margin: 1.5rem 0.5rem 0.5rem;
+        }
+        & .mui-table-view{
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            overflow: hidden;
+            background: none;
+            & li{
+                width: 40%;
+                border-radius: 0.5rem;
+            }
+        }
+    }
+    & .classify-boy {
+        & .classify-tit span{
+            color: @boyColor;
+            
+        }
+        & li{
+            background-color: #9eaaef;
+            & .mui-media-body{
+                color: #fff;
+                & p{
+                    color: @boyColor;
+                }
+            }
+        }
+    }    
+    & .classify .mui-table-view-cell.mui-media{
+        float: left;
+        padding: 10px 12px;
+        margin-bottom: 0.8rem;
+    }
+    
+    & .mui-table-view-cell:after{
+        display: none;
+    }
+    
+    & .mui-content{
+        padding: 45px 0 50px 0;
+    }
+}

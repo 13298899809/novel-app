@@ -1,0 +1,159 @@
+#content {
+  /*评分样式*/
+}
+#content .bookButt {
+  display: flex;
+  justify-content: space-around;
+  margin: 0.8rem;
+}
+#content .bookButt button {
+  color: #fff;
+  border: none;
+  overflow: hidden;
+  height: 2rem;
+  line-height: 1.6rem;
+  padding-bottom: 0;
+}
+#content .bookButt button:first-child {
+  background-color: skyblue;
+}
+#content .bookButt button:first-child p {
+  color: #fff;
+  margin-top: -1.5rem;
+  transition: all 0.5s;
+}
+#content .bookButt button:nth-child(2) {
+  background-color: #f44848;
+}
+#content .bookButt button:nth-child(3) {
+  background-color: #76ca5e;
+}
+#content .textBlock {
+  overflow: hidden;
+  padding: 10px;
+  font-size: 12px;
+  height: 52px;
+}
+#content .bookIntro {
+  display: flex;
+  justify-content: space-around;
+  background-color: rgba(135, 206, 235, 0.6);
+  width: 100%;
+  padding: 20px 50px;
+  overflow: hidden;
+  border-bottom: 1px solid #bbb;
+}
+#content .bookIntro img {
+  margin-right: 1rem;
+  display: inline;
+  width: 90px;
+  vertical-align: middle;
+  float: left;
+}
+#content .bookIntro > div {
+  width: 15rem;
+}
+#content .bookIntro h4 {
+  margin-top: 1rem;
+  color: #4c4c4c;
+}
+#content .bookIntro p {
+  color: #fff;
+}
+#content .bookMain {
+  background-color: #fff;
+}
+#content .bookMain .textTit {
+  padding-top: 0.5rem;
+  padding-left: 1rem;
+  margin-bottom: 0;
+}
+#content .bookMain .textBlock {
+  text-indent: 2em;
+}
+#content .bookMain > span {
+  border-radius: 0.5rem;
+  width: 100%;
+  text-align: center;
+  border: 1px solid #bbb;
+}
+#content .pingfen {
+  height: 20px;
+}
+#content .pingfen ul {
+  overflow: hidden;
+  padding: 0;
+  margin: 0;
+}
+#content .pingfen ul li {
+  width: 20px;
+  height: 20px;
+  background: url('../imgs/21.gif');
+  list-style-type: none;
+  float: left;
+  background-size: cover;
+}
+#content .pingfen li.jinxing {
+  background-position: left bottom;
+}
+#content .pingfen span {
+  color: #f60;
+  font-weight: bold;
+}
+#content #textComments {
+  margin: 2rem 0 1rem;
+  padding: 0.5rem 1.5rem;
+  background-color: #fff;
+}
+#content #textComments .textCommentsTit {
+  margin-bottom: 1rem;
+}
+#content #textComments .textCommentsTit span img {
+  width: 1.5rem;
+}
+#content #textComments .textCommentsTit b {
+  font-size: 1.2rem;
+}
+#content #textComments .textCommentsList .mui-table-view-cell > a:not(.mui-btn) {
+  white-space: normal;
+}
+#content #textComments .textCommentsList .mui-ellipsis {
+  white-space: normal;
+}
+#content .likeRead > .readTit > span > img {
+  width: 100%;
+}
+#content .joinTo {
+  position: absolute;
+  width: 3rem;
+  -webkit-animation-duration: 1s;
+  animation-duration: 1s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+  transition: all 5.5s;
+}
+@-webkit-keyframes rollOut {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    -webkit-transform: translate3d(-300px, 500px, 0) rotate3d(0, 0, 1, 120deg);
+    transform: translate3d(-300px, 500px, 0) rotate3d(0, 0, 1, 120deg);
+  }
+}
+@keyframes rollOut {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    -webkit-transform: translate3d(-300px, 500px, 0) rotate3d(0, 0, 1, 120deg);
+    -ms-transform: translate3d(-300px, 500px, 0) rotate3d(0, 0, 1, 120deg);
+    transform: translate3d(-300px, 500px, 0) rotate3d(0, 0, 1, 120deg);
+  }
+}
+#content .rollOut {
+  -webkit-animation-name: rollOut;
+  animation-name: rollOut;
+}

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>Hello MUI</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<link rel="stylesheet" href="css/mui.min.css">
+		<link rel="stylesheet" href="css/userCenter.css">
+		<link href="css/base.css" rel="stylesheet" />
+		<style>
+			html,
+			body {
+				background-color: #efeff4;
+			}
+			#account>.mui-content>.mui-scroll-wrapper{
+				top:46px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div id="account" class="mui-page">
+			<div class="mui-navbar-inner mui-bar mui-bar-nav">
+				<button type="button" class="mui-left mui-action-back mui-btn  mui-btn-link mui-btn-nav mui-pull-left">
+					<span class="mui-icon mui-icon-left-nav"></span>
+				</button>
+				<h1 class="mui-center mui-title">用户中心</h1>
+			</div>
+			<div class="mui-content">
+				<div class="mui-scroll-wrapper">
+					<div class="mui-scroll">
+						<ul class="mui-table-view">
+							<li class="mui-table-view-cell">
+								<a id="head" class="mui-navigate-right">
+									<b>头像</b>
+								<span class="mui-pull-right head">
+									<img class="head-img mui-action-preview" id="head-img1" src="img/logo.png"/>
+								</span>
+							</a>
+							</li>
+							<li class="mui-table-view-cell">
+								<a><b>姓名</b><span class="mui-pull-right" id="userName"><input type="text" id="myName" placeholder="登录" data-val="name"/></span></a>
+							</li>
+							<li class="mui-table-view-cell">
+								<a><b>揽阅账号</b><span class="mui-pull-right"><input type="text" id="myLY" placeholder="未登录" data-val="myLYnum"/></span></a>
+							</li>
+						</ul>
+						<ul class="mui-table-view">
+							<li class="mui-table-view-cell">
+								<a><b>QQ号</b><span class="mui-pull-right"><input type="text" id="myQQ" placeholder="未登录" data-val="myQQ"/></span></a>
+							</li>
+							<li class="mui-table-view-cell">
+								<a><b>手机号</b><span class="mui-pull-right"><input type="text" id="myPhone" placeholder="未登录" data-val="phone"/></span></a>
+							</li>
+						</ul>
+						<div class="buttons flex">
+							<button class="loginOut mui-btn mui-btn-primary">登录&nbsp;/&nbsp;注册</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+	<script src="js/mui.min.js "></script>
+	<script src="js/jquery.min.js"></script>
+	<script src="js/config.js"></script>
+	<script src="js/mustache.min.js"></script>
+	<script>
+		mui.init();
+	</script>
+	<script type="text/javascript">
+		var inputH=$('input').height();
+		$('b').css({lineHeight:inputH+'px'});
+	</script>
+	<script type="text/javascript">
+			
+			if(window.localStorage.getItem('token')){
+				$('.loginOut')[0].classList='loginOut mui-btn mui-btn-danger';	
+				$('.loginOut').html('退出登录');
+				$('.loginOut').off('tap');
+				$('.loginOut').on('tap',function(){
+					//退出登录的操作，应该是删除localStorage吧
+					var emp={};//给个空对象
+					localStorage.removeItem('token');
+					
+					//然后还有什么操作。。。。
+				});
+				$('input').off('tap');
+				data = {
+    			token:window.localStorage.getItem('token')
+    			}
+				$.post(config.site.urlRoot+'/user_info',data,function(data){
+					
+	//				data是用户信息,我先用name,phone之类代表对应数据,和标签上的data-val对应一致
+					$('#myName')[0].placeholder=data[0]['nickname'];
+					$('#myLY')[0].placeholder=data[0]['nickname'];
+					$('#myPhone')[0].placeholder=data[0]['phone'];
+					$('#myQQ')[0].placeholder=data[0]['qq'];
+				});
+				var newInfo={};
+				$('input').on('blur',function(){
+					newInfo[this.dataset.val]=this.value;
+	//				这个newInfo就是新的用户信息,建议实时上传
+				})
+		}else{
+			$('.loginOut')[0].classList='loginOut mui-btn mui-btn-primary';	
+			$('.loginOut').html('登录&nbsp;/&nbsp;注册');
+			$('.loginOut').on('tap',function(){
+				window.location='login.html';
+			});
+			$('input').off('tap');
+			$('input').on('tap',function(ev){
+				ev.preventDefault();
+				this.disabled='disabled';
+				mui.toast('请先登录!');
+			})
+		}
+	</script>
+</html>

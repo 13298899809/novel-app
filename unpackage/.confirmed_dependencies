@@ -1,0 +1,146 @@
+{
+	"index.html": {
+		"resources": [
+			"imgs/s1.jpg",
+			"css/gonggao.css",
+			"imgs/s3.jpg",
+			"imgs/s4.jpg",
+			"js/jquery.min.js",
+			"js/mui.min.js",
+			"imgs/A1.png",
+			"fonts/mui.ttf",
+			"css/mui.min.css",
+			"imgs/s2.jpg",
+			"imgs/lingdang.png",
+			"imgs/heart.png",
+			"css/index.css",
+			"imgs/hot.png",
+			"kinds.html",
+			"css/offCanvas.css",
+			"js/mustache.min.js",
+			"data/allBooks.json",
+			"data/colloect.json",
+			"js/config.js",
+			"css/base.css",
+			"data/myBook.json",
+			"css/kinds.css",
+			"imgs/A2.png",
+			"css/myBook.css",
+			"myBook.html",
+			"imgs/b2.png",
+			"setting.html",
+			"js/myBook.js",
+			"imgs/b1.png",
+			"imgs/b3.png",
+			"imgs/A3.png",
+			"imgs/A4.png",
+			"imgs/21.gif",
+			"css/content.css",
+			"imgs/comm.png",
+			"contentRead.html",
+			"js/app.js",
+			"css/login.css",
+			"login.html",
+			"js/mui.enterfocus.js"
+		],
+		"refer": [
+			"kinds.html",
+			"setting.html",
+			"myBook.html",
+			"contentRead.html"
+		]
+	},
+	"kinds.html": {
+		"resources": [
+			"css/classify.css",
+			"css/gonggao.css",
+			"css/mui.min.css",
+			"imgs/s1.jpg",
+			"js/jquery.min.js",
+			"js/mui.min.js",
+			"imgs/A1.png",
+			"fonts/mui.ttf",
+			"css/kinds.css",
+			"data/colloect.json"
+		],
+		"refer": [
+			"index.html",
+			"myBook.html",
+			"setting.html"
+		]
+	},
+	"setting.html": {
+		"resources": [
+			"css/gonggao.css",
+			"css/myBook.css",
+			"css/mui.min.css",
+			"js/feedback.js",
+			"js/mui.view.js",
+			"index.html",
+			"js/jquery.min.js",
+			"js/mui.min.js",
+			"css/userCenter.css",
+			"img/logo.png",
+			"login.html",
+			"js/mustache.min.js",
+			"js/config.js"
+		],
+		"refer": [
+			"index.html",
+			"login.html"
+		]
+	},
+	"myBook.html": {
+		"resources": [
+			"css/gonggao.css",
+			"css/myBook.css",
+			"css/mui.min.css",
+			"imgs/s1.jpg",
+			"js/jquery.min.js",
+			"js/mui.min.js",
+			"imgs/A1.png",
+			"fonts/mui.ttf",
+			"data/colloect.json",
+			"data/myBook.json",
+			"imgs/A4.png",
+			"js/mustache.min.js",
+			"contentRead.html"
+		],
+		"refer": [
+			"setting.html",
+			"contentRead.html"
+		]
+	},
+	"contentRead.html": {
+		"resources": [
+			"css/index.css",
+			"css/content.css",
+			"js/mustache.min.js",
+			"js/jquery.min.js",
+			"js/mui.min.js",
+			"css/mui.min.css",
+			"index.html",
+			"js/config.js"
+		],
+		"refer": [
+			"index.html"
+		]
+	},
+	"login.html": {
+		"resources": [
+			"js/app.js",
+			"js/mui.min.js",
+			"css/login.css",
+			"css/mui.min.css",
+			"js/mui.enterfocus.js",
+			"js/jquery.min.js",
+			"js/config.js",
+			"setting.html"
+		],
+		"refer": [
+			"main.html",
+			"index.html",
+			"setting.html"
+		]
+	}
+}

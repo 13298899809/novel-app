@@ -1,0 +1,38 @@
+
+#offCanvasSide{
+    @mainColor:skyblue;
+    //侧滑菜单样式   
+    background-color: #f5f5f5;
+    &>.mui-scroll-wrapper>.mui-scroll{
+        &>h2{
+        margin-top: 3rem;
+        margin-left: 2rem;
+        color: @mainColor;
+        }
+    }
+    & #userCenter{
+        margin-top:2rem ;
+        margin-bottom: 2rem;
+        &>img{
+            border-radius: 50%;
+            border: 0.3rem solid #ddd;
+            width: 100px;
+            height: 100px;
+            margin: 10px auto;
+            display: block;
+        }
+        &>h4{
+            text-align: center;
+        }
+    }
+    & #collect>h3{
+        padding-left: 2rem;
+        margin-bottom: 1rem;
+        & a{
+            font-size: 0.8rem;
+        }
+        & .mui-collapse-content>a>p{
+            font-size: 0.8rem;
+        }
+    }
+}

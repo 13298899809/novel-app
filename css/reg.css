@@ -1,0 +1,59 @@
+#regBox .area {
+  margin: 20px auto 0px auto;
+}
+#regBox .mui-input-group:first-child {
+  margin-top: 20px;
+}
+#regBox .mui-input-group label {
+  width: 22%;
+}
+#regBox .mui-input-row label ~ input,
+#regBox .mui-input-row label ~ select,
+#regBox .mui-input-row label ~ textarea {
+  width: 78%;
+}
+#regBox .mui-checkbox input[type=checkbox],
+#regBox .mui-radio input[type=radio] {
+  top: 6px;
+}
+#regBox .mui-content-padded {
+  margin-top: 25px;
+}
+#regBox .mui-btn {
+  padding: 10px;
+}
+#regBox #reg {
+  background-color: #3366EE;
+  border-radius: 1rem;
+  width: 60%;
+}
+#regBox .pora {
+  position: relative;
+}
+#regBox .pora button {
+  position: absolute;
+  right: 1rem;
+  top: 0.2rem;
+  text-overflow: ellipsis;
+}
+#regBox .unchecked {
+  position: absolute;
+  right: 0;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  background-color: #999;
+  color: #fff;
+  display: none;
+  line-height: 2rem;
+}
+#regBox .ui-page-login,
+#regBox {
+  width: 100%;
+  height: 100%;
+  margin: 0px;
+  padding: 0px;
+}
+#regBox .mui-content {
+  height: 100%;
+}

@@ -1,0 +1,67 @@
+li{list-style: none;}
+
+.huadong {
+	width: 60rem;
+	height: 2rem;
+	border-bottom: 1px solid #F0F0F0;
+	position: relative;
+	font: 12px/1.5 "Hiragino Sans GB", "Microsoft YaHei", simsun; 
+}
+
+.huadong .huabox {
+	margin:0;
+	width: 80%;
+	line-height: 2rem;
+	padding-left: 15px;
+}
+
+.huadong .hdimg {
+	float: left;
+	line-height: 2rem;
+}
+
+.huadong .hdimg img {
+	width: 80%;
+	vertical-align: middle;
+	display: inline;
+}
+
+.huadong h5 {
+	font-size: 1rem;
+	float: left;
+	line-height: 2rem;
+	margin: 0;
+	color: #ca5252;
+}
+
+.huadong .notice_active {
+	float: left;
+	height: 2rem;
+	padding: 0;
+	overflow: hidden;
+	position: relative;
+}
+
+.huadong .notice_active ul{
+	padding-left: 10px;
+	margin: 0;
+}
+
+.huadong .notice_active li {
+	list-style-type: none;
+	line-height: 2rem;
+	overflow: hidden;
+}
+
+
+/*.huadong .notice_active li.notice_active_ch {}*/
+
+.huadong .notice_active li.notice_active_ch span {
+	color: #000;
+	font-size: 1rem;
+	display: block;
+	float: left;
+	overflow: hidden;
+	margin: 0 0 1rem 0;
+}
+

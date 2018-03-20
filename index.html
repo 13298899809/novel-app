@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>揽阅书城</title>
+		<script src="js/mui.min.js"></script>
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<link href="css/index.css" rel="stylesheet" />
+		<link rel="stylesheet" href="css/myBook.css" />
+		<link href="css/base.css" rel="stylesheet" />
+		<link href="css/offCanvas.css" rel="stylesheet" />
+		<script type="text/javascript" src="js/jquery.min.js"></script>
+		<script type="text/javascript" src="js/myBook.js"></script>
+		<script src="js/config.js"></script>
+		<script type="text/javascript" src="data/allBooks.json"></script>
+    	<script src="js/mustache.min.js"></script>
+		<link rel="stylesheet" href="css/gonggao.css" />
+	</head>
+
+	<body class="indexBox">
+		<div class="mui-off-canvas-wrap mui-draggable mui-slide-in">
+			<!-- 菜单容器 -->
+			<aside class="mui-off-canvas-left" id="offCanvasSide">
+				<div class="mui-scroll-wrapper">
+					<div class="mui-scroll">
+						<!-- 菜单具体展示内容 -->
+						<h2>欢迎使用揽阅</h2>
+						<div id="userCenter">
+							<!--用户头像及用户名-->
+							<img src="imgs/s1.jpg" alt="" />
+							<h4>用户名(未登录)</h3>
+        			</div>
+			        <div id="collect">
+			        	<h3>收藏夹</h3>
+			        	<ul class="mui-table-view">
+			        	    <li class="mui-table-view-cell mui-collapse">
+			        	        <a class="mui-navigate-right" href="#">作者大大</a>
+			        	        <div class="mui-collapse-content" id="hotAuthor">
+			        	        </div>
+			        	    </li>
+			        	    <li class="mui-table-view-cell mui-collapse">
+			        	        <a class="mui-navigate-right" href="#">收藏图书</a>
+			        	        <div class="mui-collapse-content" id="collectBook">
+			        	        </div>
+			        	    </li>   
+			        	</ul>
+			        </div>
+      			</div>
+    		</div>
+  		</aside>
+		<script type="text/javascript">
+			$('#userCenter').on('tap',function(){window.location='setting.html'})
+		</script>	
+  		<script type="text/html" id="hotAuthorData">
+  			{{#dataAuthor}}
+  			
+  			<a href="#incontent">
+				<p>---{{author}}&nbsp;&nbsp;&nbsp;&nbsp;收藏指数:{{cs}}&nbsp;&nbsp;&nbsp;&nbsp;浏览量:{{vs}}---</p>
+			</a>
+			{{/dataAuthor}}
+  		</script>
+  		<script type="text/html" id="collectBookData">
+  			{{#dataBook}}
+  			<a href="#incontent">
+				<p>{{name}}</p>
+			</a>
+			{{/dataBook}}
+  		</script>
+  		<script type="text/javascript">
+  			var dataBook;
+    		$(function(){
+    		if(window.localStorage.getItem('token')!=null)
+  			{
+    			data = {
+    			token:window.localStorage.getItem('token')
+    			}
+    			
+    			$.post(config.site.urlRoot+'collectors',data,function(data){
+    				if(data.status==0){
+    					return false;	
+    				}
+    				dataBook=data;
+				//替换模板数据
+				var collectorData={
+    				dataBook:dataBook
+    				}
+    				//得到模板
+					var str =document.getElementById("collectBookData").innerHTML;
+					var res=Mustache.render(str,collectorData);
+					var oBox= $('#collectBook');
+					oBox.html(res);
+    			},'json');
+    		}
+    		});
+  		
+		
+		</script>
+		<script type="text/javascript">
+		var hotAuthor;
+    	(function(){
+    		$.getJSON(config.site.urlRoot+'hotAuthor',function(data){
+    			hotAuthor=data;
+				//替换模板数据
+				var collectorData={
+    				dataAuthor:hotAuthor
+    				}
+    				//得到模板
+					var str =document.getElementById("hotAuthorData").innerHTML;
+					var res=Mustache.render(str,collectorData);
+					console.log(res);
+					var oBox= $('#hotAuthor');
+					oBox.html(res);})
+    	})();
+		</script>
+	  <!-- 主页面容器 -->
+		<div class="mui-inner-wrap">
+			<header class="mui-bar mui-bar-nav">
+		      <a class="mui-icon mui-action-menu mui-icon-bars mui-pull-left" href="#offCanvasSide" data-url="pageBox"></a>
+		      <h1 class="mui-title" id="title">揽阅书城</h1>
+		    </header>
+		    <nav class="mui-bar mui-bar-tab" id="tabBar">
+			    <a class="mui-tab-item mui-active" data-url="pageBox" href="index.html" id="defaultTab">
+			        <span class="mui-icon mui-icon-home"></span>
+			        <span class="mui-tab-label">书城</span>
+			    </a>
+			    <a class="mui-tab-item" data-url="kingsDiv" href="kinds.html" id="kinds">
+			        <span class="mui-icon mui-icon-phone"></span>
+			        <span class="mui-tab-label">分类</span>
+			    </a>
+			    <a class="mui-tab-item" data-url="myBookDiv" href="myBook.html" id="myBook">
+			        <span class="mui-icon mui-icon-email"></span>
+			        <span class="mui-tab-label">书架</span>
+			    </a>
+			</nav>
+			<div id="pageBox" class="subpages">
+		    <div class="mui-content mui-scroll-wrapper" id="index">
+		      <div class="mui-scroll">
+		        <!-- 主界面具体展示内容 -->
+		        	<!--搜索框-->
+		        <div class="mui-input-row mui-search">
+				    <input type="search" class="mui-input-clear" placeholder="狐说魃道">
+				</div>
+					<!--无缝轮播图-->
+				<div id="slider" class="mui-slider" >
+					  <div class="mui-slider-group mui-slider-loop">
+					    <!-- 额外增加的一个节点(循环轮播：第一个节点是最后一张轮播) -->
+					    <div class="mui-slider-item mui-slider-item-duplicate" id='bc4'>
+					      <a href="#">
+					        <img src="imgs/s4.jpg">
+					      </a>
+					    </div>
+					    <!-- 第一张 -->
+					    <div class="mui-slider-item" id='b1'>
+					      <a href="#">
+					        <img src="imgs/s1.jpg">
+					      </a>
+					    </div>
+					    <!-- 第二张 -->
+					    <div class="mui-slider-item" id='b2'>
+					      <a href="#">
+					        <img src="imgs/s2.jpg">
+					      </a>
+					    </div>
+					    <!-- 第三张 -->
+					    <div class="mui-slider-item" id='b3'>
+					      <a href="#">
+					        <img src="imgs/s3.jpg">
+					      </a>
+					    </div>
+					    <!-- 第四张 -->
+					    <div class="mui-slider-item" id='b4'>
+					      <a href="#">
+					        <img src="imgs/s4.jpg">
+					      </a>
+					    </div>
+					    <!-- 额外增加的一个节点(循环轮播：最后一个节点是第一张轮播) -->
+					    <div class="mui-slider-item mui-slider-item-duplicate" id='bc1'>
+					      <a href="#">
+					        <img src="imgs/s1.jpg">
+					      </a>
+					    </div>
+					  </div>
+					  <!--轮播图指示器-->
+					  <div class="mui-slider-indicator">
+					    <div class="mui-indicator mui-active"></div>
+					    <div class="mui-indicator"></div>
+					    <div class="mui-indicator"></div>
+					    <div class="mui-indicator"></div>
+					  </div>
+				</div>
+					<!--公告-->
+				<div class="huadong">
+					<div class="huabox">
+						<!--公告 图标-->
+						<div class="hdimg"><img src="imgs/lingdang.png"></div>
+						<h5>【公告】</h5>
+						<div class="notice_active" id="notice">
+							 <ul>
+								<li class="notice_active_ch">
+								 积极加载中...
+								</li>
+								<li class="notice_active_ch">
+								 积极加载中...
+								</li>
+								<li class="notice_active_ch">
+								积极加载中...
+								</li>						
+							</ul>  
+						</div>
+					</div>
+				</div>
+				
+				<!--猜你喜欢开始-->
+				<div class="likeRead">
+					<!--板块标题部分-->
+					<div class="readTit readTit-like">
+						<span class="mui-icon">
+							<img src="imgs/heart.png" alt="" />
+						</span>
+						<span class="section_title">
+							猜你喜欢
+						</span>
+					</div>
+					<!--可横向滚动-->
+					<div class="mui-scroll-wrapper mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
+				        <div class="mui-scroll">
+				        	<!--弹性盒布局-->
+				            <li class="flex tapTo" id="loadLikeBox">
+				            	<!--card可循环添加数据-->
+			                    
+				            </li>
+				        </div>
+				   </div>
+				</div>
+				<!--猜你喜欢结束-->
+				<hr />
+				<!--热门图书开始-->
+				<div class="hotRead">
+					<!--板块标题-->
+					<div class="readTit readTit-like">
+						<span class="mui-icon">
+							<img src="imgs/hot.png" alt="" />
+						</span>
+						<span class="section_title">
+							热门推荐
+						</span>
+					</div>
+					<div class="mui-scroll-wrapper mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
+				        <div class="mui-scroll">
+				            <li class="flex tapTo" id="hotRead">
+				            	<!--card可循环添加数据-->
+			                    <div class="card">
+			                    	<a href="###">
+									<!--页眉，放置标题-->
+										<div class="card-header">
+											<p>极速加载中...</p>
+										</div>
+										<!--内容区-->
+										<div class="card-content">
+											<img src="imgs/A1.png" alt="" />
+										</div>
+									</a>
+									<!--页脚，放置补充信息或支持的操作-->
+									<div class="card-footer">
+										<p>作者</p>
+									</div>
+								</div>
+								<div class="card">
+			                    	<a href="###">
+									<!--页眉，放置标题-->
+										<div class="card-header">
+											<p>极速加载中...</p>
+										</div>
+										<!--内容区-->
+										<div class="card-content">
+											<img src="imgs/A1.png" alt="" />
+										</div>
+									</a>
+									<!--页脚，放置补充信息或支持的操作-->
+									<div class="card-footer">
+										<p>作者</p>
+									</div>
+								</div>
+								<div class="card">
+			                    	<a href="###">
+									<!--页眉，放置标题-->
+										<div class="card-header">
+											<p>极速加载中...</p>
+										</div>
+										<!--内容区-->
+										<div class="card-content">
+											<img src="imgs/A1.png" alt="" />
+										</div>
+									</a>
+									<!--页脚，放置补充信息或支持的操作-->
+									<div class="card-footer">
+										<p>作者</p>
+									</div>
+								</div>
+								<div class="card">
+			                    	<a href="###">
+									<!--页眉，放置标题-->
+										<div class="card-header">
+											<p>极速加载中...</p>
+										</div>
+										<!--内容区-->
+										<div class="card-content">
+											<img src="imgs/A1.png" alt="" />
+										</div>
+									</a>
+									<!--页脚，放置补充信息或支持的操作-->
+									<div class="card-footer">
+										<p>作者</p>
+									</div>
+								</div>
+								<div class="card">
+			                    	<a href="###">
+									<!--页眉，放置标题-->
+										<div class="card-header">
+											<p>极速加载中...</p>
+										</div>
+										<!--内容区-->
+										<div class="card-content">
+											<img src="imgs/A1.png" alt="" />
+										</div>
+									</a>
+									<!--页脚，放置补充信息或支持的操作-->
+									<div class="card-footer">
+										<p>作者</p>
+									</div>
+								</div>
+				            </li>
+				        </div>
+				        
+				   </div>
+				</div>
+				<!--热门图书结束-->
+				<hr />
+				<!--推荐图书-->
+				<div id="commend">
+					<!--每一列为一个li,包含一项书，li为弹性盒-->
+					<li>
+						<a href="###" class="commendList">
+							<!--图片占一份-->
+							<img src="imgs/A1.png" alt="" />
+							<div class="intro">
+								<h3>加载中</h3>
+								<p>加载中</p>
+								<div class="flex">
+									<span class="author">加载中</span>
+									<span class="scrol tag">加载中</span>
+									<span class="type tag">加载中</span>
+								</div>
+							</div>
+						</a>
+					</li>
+					<!--一项结束-->
+				</div>
+		      </div> 
+		    </div>
+		    </div>
+		    <div id="kingsDiv" class="subpages">
+		    	<iframe src="kinds.html" marginheight="50px" width="100%" height="100%" frameborder="0"></iframe>
+		    </div>
+		    <div id="myBookDiv" class="subpages">
+		    	<iframe src="myBook.html" marginheight="50px" width="100%" height="100%" frameborder="0"></iframe>
+		    </div>
+		    <div class="mui-off-canvas-backdrop"></div>
+		</div>
+	</div>
+	<script type="text/html" id="books">
+		<!--card可循环添加数据-->
+		{{#book}}
+	    <div class="card tabTo" id='box'>
+	    	<a data-num="{{num}}" class="tabTo" href="contentRead.html?num={{num}}">
+			<!--页眉，放置标题-->
+				<div class="card-header">
+					<p>{{name}}</p>
+				</div>
+				<!--内容区-->
+				<div class="card-content">
+					<!--图书封面-->
+					<img width="80px" src="{{url}}{{pic}}" alt="" />
+				</div>
+			</a>
+			<div class="card-footer">
+				<p>{{author}}</p>
+			</div>
+		</div>
+		{{/book}}
+	</script>
+	
+	<script type="text/javascript">
+		//获得slider插件对象
+		var gallery = mui('.mui-slider');
+		gallery.slider({
+		  interval:3000//自动轮播周期，若为0则不自动播放，默认为0；
+		});
+	</script>
+    <script type="text/html" id="noticeData">
+		{{#notice}}
+			<span>{{content}}</span>
+		{{/notice}}		
+	</script>
+	<script type="text/html" id="descs">
+		{{#descs}}
+		<li>
+			<a href="###" class="commendList">
+			<!--图片占一份-->
+			<img src= "{{url}}{{pic}}" alt="" />
+			<div class="intro">
+				<h3>{{name}}</h3>
+				<p>{{desc}}</p>
+				<div class="flex">
+				<span class="author">{{author}}</span>
+				<span class="scrol tag">收藏数:{{collectors}}</span>
+				<span class="type tag">{{carts}}</span>
+				</div>
+			</div>
+			</a>
+		</li>
+		{{/descs}}
+	</script>
+	
+		<script type="text/javascript">
+		function tapBook(){
+			$(".tapTo").on('tap','a',function(){
+				window.location=$(this).attr('href');
+				console.log('11'+$(this).attr('href'))
+			})
+		}
+		tapBook();
+	</script>
+    <script type="text/javascript">
+    	//banner模板
+     var banner;
+    	(function(){
+    		$.getJSON(config.site.urlRoot+'index-banner',function(data){
+    			banner=data.banners;
+				//替换模板数据
+				var collectorData={
+    				banner:banner[1]
+    				}
+    				//得到模板
+					// var str=document.getElementById("bannerData").innerHTML;
+					var str = '{{#banner}}<a href="{{url}}"><img src="'+config.site.urlRoot+'{{pic}}" alt="{{item}}"></a>{{/banner}}';
+					var res=Mustache.render(str,collectorData);
+					var oBox= $('#bc1');
+					oBox.html(res);
+				var collectorData={
+    				banner:banner[4]
+    				}
+    				//得到模板
+					// var str=document.getElementById("bannerData").innerHTML;
+					var str = '{{#banner}}<a href="{{url}}"><img src="'+config.site.urlRoot+'{{pic}}" alt="{{item}}"></a>{{/banner}}';
+					var res=Mustache.render(str,collectorData);
+					var oBox= $('#bc4');
+					oBox.html(res);
+				for (var i = 0; i<=5; i++) {
+				var collectorData={
+    				banner:banner[i]
+    				}
+    				//得到模板
+					// var str=document.getElementById("bannerData").innerHTML;
+					var str = '{{#banner}}<a href="{{url}}"><img src="'+config.site.urlRoot+'{{pic}}" alt="{{item}}"></a>{{/banner}}';
+					var res=Mustache.render(str,collectorData);
+					var oBox= $('#b'+(++i)+'');
+					oBox.html(res);
+				}
+				
+    		})
+    	})();
+    	//公告模板
+    var notice;
+    	(function(){
+    		$.getJSON(config.site.urlRoot+'index-notice',function(data){
+    			notice=data.notices;
+				//替换模板数据
+				for (var i = 0; i<=2; i++) {
+				var noticeData={
+    				notice:notice[i]
+    				}
+    			//得到模板
+				var str=document.getElementById("noticeData").innerHTML;
+					var res=Mustache.render(str,noticeData);
+					var oBox= $('#notice ul li:eq('+i+')');
+					oBox.html(res);
+				}
+				
+    		})
+    	})();
+    	//热门阅读模板
+    var hotRead;
+    	(function(){
+    		$.getJSON(config.site.urlRoot+'index-hotRead',function(data){
+    			hotRead=data['novels'];
+    			for(var i=0;i<hotRead.length;i++){hotRead[i].url=config.site.urlRoot;
+				hotRead[i].num=hotRead[i].id;}
+    		
+    			var colloectData={
+    				book:hotRead
+    			}
+				console.log(hotRead);
+    			//得到模板
+				var str=document.getElementById("books").innerHTML;
+				//替换模板数据
+				var res=Mustache.render(str,colloectData);
+				var oBox=document.getElementById("hotRead");
+				oBox.innerHTML=res;
+				setTimeout(tapBook(),2000);
+    		})
+    	})();
+    var news;
+    	(function(){
+    		$.getJSON(config.site.urlRoot+'index-news',function(data){
+    			news=data['news'];
+    			for(var i=0;i<news.length;i++){news[i].url=config.site.urlRoot;
+    				news[i].num=news[i].id;}
+    			var colloectData={
+    				book:news
+    			}
+    			//得到模板
+				var str=document.getElementById("books").innerHTML;
+				//替换模板数据
+				var res=Mustache.render(str,colloectData);
+				var oBox=document.getElementById("loadLikeBox");
+				oBox.innerHTML=res;
+				tapBook();
+    		})
+    	})();
+	var descs;
+    	(function(){
+    		$.getJSON(config.site.urlRoot+'index-descs',function(data){
+    			console.log(data);
+    			descs=data;
+    			
+    			for(var i=0;i<descs.length;i++){descs[i].url=config.site.urlRoot}
+    			var colloectData={
+    				descs:descs
+    			}
+    			console.log(colloectData);
+    			//得到模板
+				var str=document.getElementById("descs").innerHTML;
+				//替换模板数据
+				var res=Mustache.render(str,colloectData);
+				var oBox=document.getElementById("commend");
+				oBox.innerHTML=res;
+				$('.intro>p').css({'height':'4rem','overflow':'hidden'})
+    		})
+    	})();
+    </script>
+	<script type="text/javascript">
+			function timer(opj) {
+				$(opj).find('ul').animate({
+					marginTop: "-3rem"
+				}, 500, function() {
+					$(this).css({
+						marginTop: "0rem"
+					}).find("li:first").appendTo(this);
+				})
+			}
+			$(function() {
+				var num = $('.notice_active').find('li').length;
+				if(num > 1) {
+					var time = setInterval('timer(".notice_active")', 3500);
+					$('.gg_more a').mousemove(function() {
+						clearInterval(time);
+					}).mouseout(function() {
+						time = setInterval('timer(".notice_active")', 3500);
+					});
+				}
+
+				$(".news_ck").click(function() {
+					location.href = $(".notice_active .notice_active_ch").children(":input").val();
+				})
+			});
+		</script>
+	</body>
+	<script>
+		var deceleration = mui.os.ios?0.003:0.0009;
+		mui('.mui-scroll-wrapper').scroll({
+			scrollY: true, //是否竖向滚动
+			scrollX: true, //是否横向滚动
+			startX: 0, //初始化时滚动至x
+			startY: 0, //初始化时滚动至y
+			indicators: false, //是否显示滚动条
+			bounce: true, //是否启用回弹
+			deceleration: deceleration //flick 减速系数，系数越大，滚动速度越慢，滚动距离越小，默认值0.0006
+		});
+		$('#tabBar').on('tap','a',function(){
+			boxId=this.dataset.url;
+			$("#pageBox").hide();
+			$("#kingsDiv").hide();
+			$("#myBookDiv").hide();
+			$('#'+boxId).show();
+		})
+    </script>
+	<script>
+    	$(".tapTo").on('tap','a',function(){
+				window.location=$(this).attr('href');
+				console.log($(this).attr('href'))
+			});
+	
+	</script>
+
+</html>

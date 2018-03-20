@@ -1,0 +1,44 @@
+#kinds .classify {
+  position: relative;
+}
+#kinds .classify .mui-table-view {
+  padding-bottom: 1.8rem;
+}
+#kinds .classify .classify-tit span {
+  font-size: 1.5rem;
+  margin: 1.5rem 0.5rem 0.5rem;
+}
+#kinds .classify .mui-table-view {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  overflow: hidden;
+  background: none;
+}
+#kinds .classify .mui-table-view li {
+  width: 40%;
+  border-radius: 0.5rem;
+}
+#kinds .classify-boy .classify-tit span {
+  color: #3366ee;
+}
+#kinds .classify-boy li {
+  background-color: #9eaaef;
+}
+#kinds .classify-boy li .mui-media-body {
+  color: #fff;
+}
+#kinds .classify-boy li .mui-media-body p {
+  color: #3366ee;
+}
+#kinds .classify .mui-table-view-cell.mui-media {
+  float: left;
+  padding: 10px 12px;
+  margin-bottom: 0.8rem;
+}
+#kinds .mui-table-view-cell:after {
+  display: none;
+}
+#kinds .mui-content {
+  padding: 45px 0 50px 0;
+}
