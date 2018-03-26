@@ -75,9 +75,21 @@
 					code:$('#code').val()
 				};
                 $.post(url+'user-register',data,function(result){
-                    if(result){
-                    	mui.toast('注册成功');
-                    	window.location='login.html'
+                	console.log(result);
+                    switch(result.status){
+                    	case 1:
+	                    	mui.toast('注册成功');
+	                    	window.location='login.html';
+	                    	break;
+	                    case 2:
+	                    	mui.toast('手机号已注册');
+	                    	break;
+	                    case 3:
+	                    	mui.toast('账号已注册');
+	                    	break;
+	                    case 0:
+	                    	mui.toast('用户名忘填了吧');
+	                    	break;
                     }
                 });
 			});

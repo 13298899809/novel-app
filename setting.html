@@ -84,7 +84,7 @@
 					var emp={};//给个空对象
 					localStorage.removeItem('token');
 					
-					//然后还有什么操作。。。。
+					
 				});
 				$('input').off('tap');
 				data = {
@@ -93,7 +93,8 @@
 				$.post(config.site.urlRoot+'/user_info',data,function(data){
 					
 	//				data是用户信息,我先用name,phone之类代表对应数据,和标签上的data-val对应一致
-					$('#myName')[0].placeholder=data[0]['nickname'];
+					$('#myName')[0].placeholder==data[0]['nickname'];
+					window.localStorage.setItem('nickname', data[0]['nickname']);
 					$('#myLY')[0].placeholder=data[0]['nickname'];
 					$('#myPhone')[0].placeholder=data[0]['phone'];
 					$('#myQQ')[0].placeholder=data[0]['qq'];
